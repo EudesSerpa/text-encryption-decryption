@@ -24,34 +24,39 @@
       </a>
     </header>
 
-    <main>
-      <div class="wrapper">
-        <h1 class="title">Encrypter / Decrypter ONE</h1>
+    <main class="wrapper">
+      <h1 class="title">Encrypter / Decrypter ONE</h1>
 
-        <div class="textarea-container">
-          <textarea
-            id="text"
-            placeholder="Enter text to encrypt/decrypt"
-            rows="10"
-            cols="50"
-          ></textarea>
+      <div class="main-container">
+        <div class="type-container">
+          <div class="textarea-container">
+            <textarea
+              id="text"
+              placeholder="Enter text to encrypt/decrypt"
+              rows="10"
+              cols="50"
+            ></textarea>
+          </div>
+
+          <section class="buttons-section">
+            <div class="info">
+              <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+              <span>Only lowercase letters witout accent</span>
+            </div>
+
+            <div class="buttons">
+              <button class="encrypt">Encrypt</button>
+              <button>Decrypt</button>
+            </div>
+          </section>
         </div>
-
-        <section class="buttons-section">
-          <div class="info">
-            <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
-            <span>Only lowercase letters witout accent</span>
-          </div>
-
-          <div class="buttons">
-            <button class="encrypt">Encrypt</button>
-            <button>Decrypt</button>
-          </div>
-        </section>
 
         <section class="display">
           <picture>
-            <source srcset="" media="(min-width: 768px)" />
+            <img
+              src="https://i.postimg.cc/5tqz25tG/Mu-eco.png"
+              alt="Not found text"
+            />
           </picture>
 
           <p class="notFoundText">No message found</p>
@@ -70,6 +75,7 @@
         <a href="https://www.linkedin.com/in/eudes-serpa/">Eudes Serpa</a>
       </p>
     </footer>
+
     <script src="./index.js"></script>
   </body>
 </html>

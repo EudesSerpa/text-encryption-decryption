@@ -116,6 +116,7 @@ textarea::-webkit-input-placeholder {
   height: 3.7rem;
   font-size: 1rem;
   font-weight: 700;
+  color: var(--secondary-color);
   background-color: transparent;
   border: 1px solid var(--secondary-color);
   border-radius: 14px;
@@ -150,6 +151,10 @@ textarea::-webkit-input-placeholder {
   text-align: center;
 }
 
+.display picture {
+  display: none;
+}
+
 .display .notFoundText {
   font-size: 1.7rem;
   font-weight: 700;
@@ -166,7 +171,6 @@ textarea::-webkit-input-placeholder {
   align-items: center;
   justify-content: center;
   height: 50px;
-  padding: .5rem 0;
   color: var(--primary-color);
   background-color: var(--secondary-color);
   font-size: .9rem;
@@ -201,4 +205,107 @@ textarea::-webkit-input-placeholder {
   margin: 0 .3rem;
   font-size: 1rem;
   color: #ea2121;
+}
+
+
+
+
+/* -- Responsive */
+/* Tablet */
+@media screen and (min-width: 600px) {
+  .wrapper {
+    width: 90%;
+  }
+
+  .header {
+    height: 100px;
+  }
+
+  .header-logo {
+    width: 100px;
+  }
+
+  .title {
+    font-size: 5vh;
+  }
+
+  textarea {
+    font-size: 1.6rem;
+  }
+
+  .buttons {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1rem;
+    height: 6.5rem;
+  }
+
+  .buttons button {
+    height: 4.5rem;
+    font-size: 1.2rem;
+  }
+
+  .display .notFoundText {
+    font-size: 2rem;
+  }
+
+  .display .text {
+    font-size: 1rem;
+  }
+
+  .footer {
+    font-size: 1rem;
+  }
+}
+
+/* Desktop */
+@media screen and (min-width: 768px) {
+  .main-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .type-container,
+  .display {
+    height: 540px;
+  }
+
+  .type-container {
+    max-width: 700px;
+  }
+  
+  .textarea-container {
+    height: 400px;
+    
+  }
+  
+  .buttons-section {
+    margin-bottom: 0;
+  }
+
+  .display {
+    
+    max-width: 360px;
+  }
+
+  .display picture {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .main-container {
+    margin-bottom: 3rem;
+  }
+
+  .type-container,
+  .display {
+    height: 640px;
+  }
+
+  .textarea-container {
+    height: 500px;
+  }
 }
