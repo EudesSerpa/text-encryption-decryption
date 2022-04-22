@@ -46,23 +46,41 @@
 
             <div class="buttons">
               <button class="encrypt">Encrypt</button>
-              <button>Decrypt</button>
+              <button class="decrypt">Decrypt</button>
             </div>
           </section>
         </div>
 
         <section class="display">
-          <picture>
-            <img
-              src="https://i.postimg.cc/5tqz25tG/Mu-eco.png"
-              alt="Not found text"
-            />
-          </picture>
+          <div class="display-withoutText">
+            <picture>
+              <img
+                src="https://i.postimg.cc/5tqz25tG/Mu-eco.png"
+                alt="Not found text"
+                width="336"
+                height="304"
+              />
+            </picture>
 
-          <p class="notFoundText">No message found</p>
-          <span class="text"
-            >Type the text you want to encrypt or decrypt.</span
-          >
+            <p class="notFoundText">No message found</p>
+            <span class="text"
+              >Type the text you want to encrypt or decrypt.</span
+            >
+          </div>
+
+          <div class="display-withText">
+            <section class="encrypt-text">
+              <h3 class="encrypt-text-title">Encrypted text</h3>
+              <p class="encrypt-result text-result"></p>
+            </section>
+
+            <section class="decrypt-text">
+              <h3 class="decrypt-text-title">Decrypted text</h3>
+              <p class="decrypt-result text-result"></p>
+            </section>
+
+            <button class="btn-copy">Copy</button>
+          </div>
         </section>
       </div>
     </main>
