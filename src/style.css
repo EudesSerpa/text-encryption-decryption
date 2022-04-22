@@ -138,6 +138,11 @@ button:active {
   border: none;
 }
 
+.btn-copy:disabled {
+  opacity: .5;
+  pointer-events: none;
+}
+
 /* -- Display */
 .display {
   display: flex;
@@ -174,6 +179,7 @@ button:active {
   width: 100%;
   height: 100%;
   text-align: left;
+  overflow-wrap: break-word;
 }
 
 .encrypt-text-title,

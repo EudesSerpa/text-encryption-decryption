@@ -6,6 +6,23 @@ const decryptButton = document.querySelector(".decrypt");
 const displayNotFound = document.querySelector(".display-withoutText");
 const displayFound = document.querySelector(".display-withText");
 
+const copyButton = document.querySelector(".btn-copy");
+
+const validations = {
+  noSpecialCharacters: {
+    regex: /\W+/g,
+    message: "No special characters",
+  },
+};
+
+const encryptionKeys = {
+  a: "ai",
+  e: "enter",
+  i: "imes",
+  o: "ober",
+  u: "ufat",
+};
+
 const isDisplayEmpty = () => {
   const data = document.querySelectorAll(".text-result");
 
@@ -30,6 +47,11 @@ const checkText = (text) => {
     return false;
   }
 
+  if (validations.noSpecialCharacters.regex.test(text)) {
+    alert(validations.noSpecialCharacters.message);
+    return false;
+  }
+
   return true;
 };
 
@@ -43,7 +65,25 @@ const renderText = (textToRender, nodo) => {
 };
 
 const encrypt = (text) => {
-  // Encrypt logic
+  const arrToRender = text.split("");
+  const textEncrypted = arrToRender
+    .map((char) => encryptionKeys[char] || char)
+    .join("");
+
+  return textEncrypted;
+};
+
+const decrypt = (text) => {
+  let textDecrypted = text;
+
+  Object.entries(encryptionKeys).forEach(([key, value]) => {
+    if (text.includes(value)) {
+      const regex = new RegExp(value, "g");
+      textDecrypted = textDecrypted.replace(regex, key);
+    }
+  });
+
+  return textDecrypted;
 };
 
 // First render
@@ -59,12 +99,42 @@ encryptButton.addEventListener("click", () => {
 
   const textEncrypted = encrypt(textToEncrypt);
 
-  renderText(textToEncrypt, nodoToRenderText);
+  renderText(textEncrypted, nodoToRenderText);
 });
 
 decryptButton.addEventListener("click", () => {
   const nodoToRenderText = document.querySelector(".decrypt-result");
   const textToDecrypt = text.value;
 
-  renderText(textToDecrypt, nodoToRenderText);
+  const textDecrypted = decrypt(textToDecrypt);
+
+  renderText(textDecrypted, nodoToRenderText);
+});
+
+copyButton.addEventListener("click", (e) => {
+  navigator.permissions.query({ name: "clipboard-write" }).then((result) => {
+    if (result.state == "granted" || result.state == "prompt") {
+      const textToCopy = window.getSelection().toString();
+
+      if (!textToCopy) {
+        alert("Please select some text to copy");
+        return;
+      }
+
+      navigator.clipboard.writeText(textToCopy).then(
+        () => {
+          e.target.innerText = "Copied!";
+          e.target.disabled = true;
+
+          setTimeout(() => {
+            e.target.innerText = "Copy";
+            e.target.disabled = false;
+          }, 1500);
+        },
+        (err) => {
+          console.error("Could not copy text: ", err);
+        }
+      );
+    }
+  });
 });
