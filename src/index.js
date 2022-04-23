@@ -9,9 +9,13 @@ const displayFound = document.querySelector(".display-withText");
 const copyButton = document.querySelector(".btn-copy");
 
 const validations = {
-  noSpecialCharacters: {
-    regex: /\W+/g,
-    message: "No special characters",
+  noAccent: {
+    regex: /[À-ú]|[\´]|[\`]+/gi,
+    message: "No accents allowed",
+  },
+  noSpecialChars: {
+    regex: /[^a-zA-Z0-9\s]/gi,
+    message: "No special characters allowed",
   },
 };
 
@@ -21,6 +25,11 @@ const encryptionKeys = {
   i: "imes",
   o: "ober",
   u: "ufat",
+};
+
+const removeExtraWhiteSpaces = (text) => {
+  const textTrimmed = text.replace(/^\s+|\s+$/g, "");
+  return textTrimmed.replace(/\s+/g, " ");
 };
 
 const isDisplayEmpty = () => {
@@ -41,27 +50,33 @@ const showFound = () => {
   displayNotFound.style.display = "none";
 };
 
+const renderText = (textToRender, nodo) => {
+  nodo.innerText = textToRender;
+  showFound();
+
+  text.value = "";
+};
+
 const checkText = (text) => {
   if (text === "") {
     alert("Please enter a text");
     return false;
   }
 
-  if (validations.noSpecialCharacters.regex.test(text)) {
-    alert(validations.noSpecialCharacters.message);
+  const hasAccent = text.match(validations.noAccent.regex);
+
+  if (hasAccent) {
+    alert(validations.noAccent.message);
+    return false;
+  }
+
+  const hasSpecialChars = text.match(validations.noSpecialChars.regex);
+  if (hasSpecialChars) {
+    alert(validations.noSpecialChars.message);
     return false;
   }
 
   return true;
-};
-
-const renderText = (textToRender, nodo) => {
-  if (!checkText(textToRender)) return;
-
-  nodo.innerText = textToRender;
-  showFound();
-
-  text.value = "";
 };
 
 const encrypt = (text) => {
@@ -95,7 +110,9 @@ if (isDisplayEmpty()) {
 
 encryptButton.addEventListener("click", () => {
   const nodoToRenderText = document.querySelector(".encrypt-result");
-  const textToEncrypt = text.value;
+  const textToEncrypt = removeExtraWhiteSpaces(text.value);
+
+  if (!checkText(textToEncrypt)) return;
 
   const textEncrypted = encrypt(textToEncrypt);
 
@@ -104,7 +121,9 @@ encryptButton.addEventListener("click", () => {
 
 decryptButton.addEventListener("click", () => {
   const nodoToRenderText = document.querySelector(".decrypt-result");
-  const textToDecrypt = text.value;
+  const textToDecrypt = removeExtraWhiteSpaces(text.value);
+
+  if (!checkText(textToDecrypt)) return;
 
   const textDecrypted = decrypt(textToDecrypt);
 
